@@ -1,27 +1,48 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import Swiper from 'react-native-swiper';
 
-const LargeButton = () => {
+const StorySlider = () => {
   return (
-    <TouchableOpacity style={styles.button}>
-      <Text style={styles.buttonText}>Click Me</Text>
-    </TouchableOpacity>
+    <Swiper style={styles.wrapper} showsButtons={false} showsPagination={false} loop={false}>
+      <View style={styles.slide1}>
+        <Text style={styles.text}>Story 1</Text>
+      </View>
+      <View style={styles.slide2}>
+        <Text style={styles.text}>Story 2</Text>
+      </View>
+      <View style={styles.slide3}>
+        <Text style={styles.text}>Story 3</Text>
+      </View>
+    </Swiper>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: 'blue',
-    paddingVertical: 20, // Điều chỉnh chiều cao của nút
-    paddingHorizontal: 40, // Điều chỉnh chiều rộng của nút
-    borderRadius: 10, // Điều chỉnh độ cong góc của nút
-    alignItems: 'center', // Căn giữa theo chiều ngang
+  wrapper: {},
+  slide1: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e74c3c',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 20, // Điều chỉnh kích thước chữ
-    fontWeight: 'bold', // Điều chỉnh độ đậm của chữ
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#3498db',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#2ecc71',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
   },
 });
 
-export default LargeButton;
+export default StorySlider;

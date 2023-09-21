@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const SignUp = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleRegister = async () => {
+    try {
+       
+      const userData = {
+        email,
+        password,
+      };
 
-const SignUp = () => {
+      // Lưu thông tin đăng ký vào AsyncStorage
+      await AsyncStorage.setItem('userData', JSON.stringify(userData));
+
+      // Điều hướng người dùng đến màn hình đăng nhập sau khi đăng ký thành công
+      navigation.replace('Login');
+    } catch (error) {
+      console.error('Lỗi khi đăng ký: ', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -10,6 +30,7 @@ const SignUp = () => {
       <TextInput  style={styles.input}
         placeholder="Fullname"  
         autoCapitalize="none"
+
       />
       <TextInput
         style={styles.input}
@@ -20,13 +41,17 @@ const SignUp = () => {
         placeholder="Email Adress"
         keyboardType="email-address"
         autoCapitalize="none"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
       />
       <TextInput  style={styles.input}
         placeholder="PassWord"
         autoCapitalize="none"
+        value={password}
+        onChangeText={(text) => setPassword(text)}
       />
       
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
       <Text style={styles.buttonText}>SignUp</Text>
     </TouchableOpacity>
        
